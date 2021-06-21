@@ -1,0 +1,22 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'poll/style.css' %}"
+
+<header>
+    <h1><a class="titulo" href="{% url 'poll:home' %}">Polls site<a></h1>
+</header>
+
+<main>
+    <fieldset>
+        <legend><h2>{{question.question_text}}</h2></legend>
+        <ul>
+            {% for choice in question.choice_set.all %}
+                <li>{{choice.choice_text}} ---- {{choice.votes}} votes</li>
+            {% endfor %}
+        </ul>
+
+        <a class="link" href="{% url 'poll:detail' question.id %}">Vote again<a>
+    </fieldset>
+
+    
+<main>

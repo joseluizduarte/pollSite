@@ -1,0 +1,23 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'poll/style.css' %}"
+
+<header>
+    <h1><a class="titulo" href="{% url 'poll:home' %}">Polls site<a></h1>
+</header>
+
+<main>
+    <form action="{% url 'poll:vote' question.id%}" method="post">
+        {% csrf_token %}
+
+        <fieldset>
+            <legend><h2>{{question.question_text}}</h2></legend>
+            {% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="choice" value="{{choice.id}}" id="choice{{forloop.counter}}">
+                <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br>
+            {% endfor %}
+            <input type="submit" value="Vote">
+        </fieldset>
+    </form>
+</main>

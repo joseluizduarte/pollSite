@@ -1,0 +1,25 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'poll/style.css' %}">
+
+<header>
+    <h1><a class="titulo" href="{% url 'poll:home' %}">Polls site<a></h1>
+</header>
+
+
+<main>
+    <div class="poll-list">
+        {% for question in questions %}
+            <a class="link" href="{% url 'poll:detail' question.id %}">{{question.question_text}}</a><br>
+        {% endfor %}
+    </div>
+</main>
+
+<footer>
+    <div class="box">
+            <a href="{% url 'poll:suggestion' %}">Suggest a question</a>
+            <a href="{% url 'poll:randomQuestion' %}">Random question</a>
+            <a href="#">Login</a>
+            <a href="#">Register</a>
+    </div>
+</footer>
